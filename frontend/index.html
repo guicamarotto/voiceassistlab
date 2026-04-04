@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoiceAssist Lab — Loja Demo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🛒 Loja Demo — Assistente de Suporte</h1>
+      <p class="subtitle">Fale ou escreva sua pergunta sobre pedidos, produtos ou devoluções.</p>
+    </header>
+
+    <main>
+      <!-- Chat history -->
+      <div id="chat-history" class="chat-history" aria-live="polite" aria-label="Histórico de conversa"></div>
+
+      <!-- Text input -->
+      <form id="text-form" class="input-area">
+        <input
+          id="text-input"
+          type="text"
+          placeholder="Digite sua mensagem..."
+          autocomplete="off"
+          maxlength="500"
+          aria-label="Mensagem de texto"
+        />
+        <button type="submit" id="send-btn">Enviar</button>
+      </form>
+
+      <!-- Voice controls -->
+      <div class="voice-controls">
+        <button id="mic-btn" class="mic-btn idle" aria-label="Iniciar gravação de voz">
+          🎤
+        </button>
+        <span id="voice-status" class="voice-status">Pronto para ouvir</span>
+      </div>
+
+      <!-- Transcript display -->
+      <div id="transcript" class="transcript" aria-live="polite"></div>
+    </main>
+
+    <footer>
+      <small>VoiceAssist Lab · <a href="/swagger" target="_blank">API Docs</a></small>
+    </footer>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

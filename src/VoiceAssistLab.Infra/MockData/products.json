@@ -1,0 +1,92 @@
+[
+  {
+    "id": "PROD-001",
+    "name": "Fone de Ouvido Bluetooth",
+    "description": "Fone over-ear sem fio com cancelamento de ruído ativo, bateria de 30h e conexão multipoint.",
+    "price": 199.90,
+    "stock": 45,
+    "category": "Audio",
+    "rating": 4.7
+  },
+  {
+    "id": "PROD-002",
+    "name": "Teclado Mecânico RGB",
+    "description": "Teclado mecânico com switches blue, retroiluminação RGB por tecla e layout ABNT2.",
+    "price": 349.90,
+    "stock": 12,
+    "category": "Periféricos",
+    "rating": 4.5
+  },
+  {
+    "id": "PROD-003",
+    "name": "Cabo USB-C 2m",
+    "description": "Cabo USB-C para USB-C de 2 metros com suporte a carga rápida 100W e transferência de dados 10Gbps.",
+    "price": 29.90,
+    "stock": 200,
+    "category": "Cabos",
+    "rating": 4.3
+  },
+  {
+    "id": "PROD-004",
+    "name": "Mouse Sem Fio",
+    "description": "Mouse ergonômico sem fio com sensor de 4000 DPI, bateria de 12 meses e conexão USB nano.",
+    "price": 129.90,
+    "stock": 67,
+    "category": "Periféricos",
+    "rating": 4.6
+  },
+  {
+    "id": "PROD-005",
+    "name": "Mousepad XL",
+    "description": "Mousepad extra grande 90x40cm com base antiderrapante e bordas costuradas.",
+    "price": 59.90,
+    "stock": 88,
+    "category": "Acessórios",
+    "rating": 4.4
+  },
+  {
+    "id": "PROD-006",
+    "name": "Webcam Full HD",
+    "description": "Webcam 1080p 30fps com microfone embutido, correção automática de luz e plug-and-play.",
+    "price": 279.90,
+    "stock": 0,
+    "category": "Video",
+    "rating": 4.2
+  },
+  {
+    "id": "PROD-007",
+    "name": "Hub USB 7 Portas",
+    "description": "Hub USB 3.0 com 7 portas, alimentação independente e indicadores LED por porta.",
+    "price": 89.90,
+    "stock": 34,
+    "category": "Conectividade",
+    "rating": 4.5
+  },
+  {
+    "id": "PROD-008",
+    "name": "Suporte para Monitor",
+    "description": "Suporte articulado para monitor de 17 a 32 polegadas com ajuste de altura, inclinação e rotação.",
+    "price": 149.90,
+    "stock": 23,
+    "category": "Ergonomia",
+    "rating": 4.8
+  },
+  {
+    "id": "PROD-009",
+    "name": "Caixa de Som Bluetooth 20W",
+    "description": "Caixa de som portátil 20W RMS, resistente à água IPX5, bateria 12h e pareamento duplo.",
+    "price": 239.90,
+    "stock": 19,
+    "category": "Audio",
+    "rating": 4.6
+  },
+  {
+    "id": "PROD-010",
+    "name": "Carregador USB-C 65W GaN",
+    "description": "Carregador compacto GaN 65W com 2 portas USB-C e 1 USB-A, compatível com notebooks e smartphones.",
+    "price": 189.90,
+    "stock": 56,
+    "category": "Carregadores",
+    "rating": 4.7
+  }
+]

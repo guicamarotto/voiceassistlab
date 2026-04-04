@@ -1,0 +1,70 @@
+services:
+  # ── ASR: onerahmet/openai-whisper-asr-webservice ─────────────────────────────
+  # Exposes POST /asr?encode=true&task=transcribe&language=pt&output=json
+  # Compatible with WhisperAsrClient (audio_file field, returns {"text":"..."})
+  whisper:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    container_name: voiceassist-whisper
+    restart: unless-stopped
+    environment:
+      - ASR_MODEL=small
+      - ASR_ENGINE=openai_whisper
+    ports:
+      - "8081:9000"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9000/docs"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 120s   # model download + load on first run
+
+  # ── TTS: Kokoro-web (OpenAI-compatible) ──────────────────────────────────────
+  kokoro:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:latest
+    container_name: voiceassist-kokoro
+    restart: unless-stopped
+    environment:
+      - KOKORO_VOICES=af_bella,af_sky
+    ports:
+      - "3000:8880"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8880/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ── Observability: Seq structured log server ──────────────────────────────────
+  seq:
+    image: datalust/seq:latest
+    container_name: voiceassist-seq
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5341:5341"   # ingestion (OTLP/HTTP logs)
+      - "8088:80"     # web UI
+    volumes:
+      - seq-data:/data
+
+  # ── .NET API (dev override — uncomment if you want to run API in Docker) ──────
+  # api:
+  #   build:
+  #     context: ..
+  #     dockerfile: src/VoiceAssistLab.Api/Dockerfile
+  #   environment:
+  #     - LLM__PROVIDER=groq
+  #     - LLM__GROQ__APIKEY=${LLM__GROQ__APIKEY}
+  #     - WHISPER__BASEURL=http://whisper:8081
+  #     - KOKORO__BASEURL=http://kokoro:3000
+  #     - SEQ__SERVERURL=http://seq:5341
+  #   ports:
+  #     - "5000:8080"
+  #   depends_on:
+  #     whisper:
+  #       condition: service_healthy
+  #     kokoro:
+  #       condition: service_healthy
+
+volumes:
+  seq-data:

@@ -1,0 +1,34 @@
+{
+  "title": "Política de Trocas e Devoluções — Loja Demo",
+  "summary": "Você tem até 30 dias corridos após o recebimento para solicitar troca ou devolução, sem necessidade de justificativa.",
+  "rules": [
+    {
+      "title": "Prazo para devolução",
+      "text": "O produto deve ser devolvido em até 30 dias corridos a partir da data de entrega, conforme o Código de Defesa do Consumidor."
+    },
+    {
+      "title": "Condições do produto",
+      "text": "O produto deve estar na embalagem original, sem sinais de uso, com todos os acessórios, manuais e nota fiscal."
+    },
+    {
+      "title": "Como solicitar",
+      "text": "Acesse 'Meus Pedidos' no site ou app, selecione o pedido e clique em 'Solicitar Devolução'. O código de postagem será enviado por e-mail em até 1 hora."
+    },
+    {
+      "title": "Frete de devolução",
+      "text": "O frete de devolução é gratuito. Use o código de postagem enviado por e-mail para postar nos Correios ou parceiros credenciados."
+    },
+    {
+      "title": "Reembolso",
+      "text": "Após recebermos e analisarmos o produto (até 5 dias úteis), o reembolso é processado em até 10 dias úteis no cartão de crédito ou em 3 dias úteis via PIX."
+    },
+    {
+      "title": "Troca por defeito",
+      "text": "Para produtos com defeito, a troca é gratuita dentro do prazo de garantia de 1 ano. Acesse o suporte técnico pelo chat ou telefone 0800-000-0000."
+    },
+    {
+      "title": "Produtos sem direito a devolução",
+      "text": "Software ativado, produtos personalizados e itens de higiene pessoal abertos não podem ser devolvidos, exceto em caso de defeito."
+    }
+  ]
+}

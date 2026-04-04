@@ -1,0 +1,142 @@
+[
+  {
+    "id": "G01",
+    "input": "Qual o status do meu pedido ORD-001?",
+    "expected_intent": "order_status",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": ["ORD-001", "entregue"]
+  },
+  {
+    "id": "G02",
+    "input": "Meu pedido ORD-002 já saiu para entrega?",
+    "expected_intent": "order_status",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": ["ORD-002", "trânsito"]
+  },
+  {
+    "id": "G03",
+    "input": "Quero saber o status do pedido ORD-003",
+    "expected_intent": "order_status",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": ["ORD-003", "processando"]
+  },
+  {
+    "id": "G04",
+    "input": "O pedido ORD-004 foi cancelado mesmo?",
+    "expected_intent": "order_status",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": ["ORD-004", "cancelado"]
+  },
+  {
+    "id": "G05",
+    "input": "Quando chega o pedido ORD-005?",
+    "expected_intent": "order_status",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": ["ORD-005"]
+  },
+  {
+    "id": "G06",
+    "input": "Me fale sobre o produto PROD-001",
+    "expected_intent": "product_info",
+    "tools_expected": ["get_product_info"],
+    "response_must_contain": ["PROD-001"]
+  },
+  {
+    "id": "G07",
+    "input": "Quais são as especificações do PROD-002?",
+    "expected_intent": "product_info",
+    "tools_expected": ["get_product_info"],
+    "response_must_contain": ["PROD-002"]
+  },
+  {
+    "id": "G08",
+    "input": "O PROD-003 está disponível em outras cores?",
+    "expected_intent": "product_info",
+    "tools_expected": ["get_product_info"],
+    "response_must_contain": []
+  },
+  {
+    "id": "G09",
+    "input": "Qual o preço do produto PROD-005?",
+    "expected_intent": "product_info",
+    "tools_expected": ["get_product_info"],
+    "response_must_contain": ["PROD-005"]
+  },
+  {
+    "id": "G10",
+    "input": "Qual é a política de devolução de vocês?",
+    "expected_intent": "return_policy",
+    "tools_expected": ["get_return_policy"],
+    "response_must_contain": ["30"]
+  },
+  {
+    "id": "G11",
+    "input": "Posso devolver um produto depois de 15 dias?",
+    "expected_intent": "return_policy",
+    "tools_expected": ["get_return_policy"],
+    "response_must_contain": ["30"]
+  },
+  {
+    "id": "G12",
+    "input": "Como faço para trocar um produto com defeito?",
+    "expected_intent": "return_policy",
+    "tools_expected": ["get_return_policy"],
+    "response_must_contain": []
+  },
+  {
+    "id": "G13",
+    "input": "Olá, preciso de ajuda com meu pedido",
+    "expected_intent": "greeting_support",
+    "tools_expected": [],
+    "response_must_contain": []
+  },
+  {
+    "id": "G14",
+    "input": "Bom dia!",
+    "expected_intent": "greeting",
+    "tools_expected": [],
+    "response_must_contain": []
+  },
+  {
+    "id": "G15",
+    "input": "Não recebi meu pedido ORD-001 ainda",
+    "expected_intent": "order_status",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": ["ORD-001"]
+  },
+  {
+    "id": "G16",
+    "input": "Quais produtos vocês vendem?",
+    "expected_intent": "product_catalog",
+    "tools_expected": [],
+    "response_must_contain": []
+  },
+  {
+    "id": "G17",
+    "input": "Meu pedido chegou quebrado, o que faço?",
+    "expected_intent": "return_policy",
+    "tools_expected": ["get_return_policy"],
+    "response_must_contain": []
+  },
+  {
+    "id": "G18",
+    "input": "Pedido ORD-999 não existe né?",
+    "expected_intent": "order_status",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": []
+  },
+  {
+    "id": "G19",
+    "input": "Qual o prazo de entrega normal?",
+    "expected_intent": "delivery_info",
+    "tools_expected": [],
+    "response_must_contain": []
+  },
+  {
+    "id": "G20",
+    "input": "Tem como rastrear meu pedido ORD-002?",
+    "expected_intent": "order_tracking",
+    "tools_expected": ["get_order_status"],
+    "response_must_contain": ["ORD-002"]
+  }
+]
