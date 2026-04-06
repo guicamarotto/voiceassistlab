@@ -1,5 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\VoiceAssistLab.Core\VoiceAssistLab.Core.csproj" />
     <ProjectReference Include="..\VoiceAssistLab.Infra\VoiceAssistLab.Infra.csproj" />
@@ -8,24 +14,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Anthropic.SDK: used directly in LlmServiceExtensions for AnthropicClient ctor -->
     <PackageReference Include="Anthropic.SDK" Version="5.10.0" />
-    <PackageReference Include="FluentValidation" Version="12.*" />
+    <!-- FluentValidation base is in Core; only the DI extensions package needed here -->
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.15.1" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.15.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.15.0" />
-    <PackageReference Include="Scalar.AspNetCore" Version="2.13.19" />
-    <PackageReference Include="Serilog.AspNetCore" Version="8.*" />
+    <!-- OTel 1.9.x: last series that targets Microsoft.Extensions.Hosting 8.x (not 9.x) -->
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.2.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.*" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
 
 </Project>

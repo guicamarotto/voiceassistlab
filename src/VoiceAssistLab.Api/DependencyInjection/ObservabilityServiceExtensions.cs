@@ -14,20 +14,40 @@ public static class ObservabilityServiceExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var otlpEndpoint = configuration["Otel:Endpoint"] ?? "http://localhost:4317";
+        var otlpEndpoint = configuration["Otel:Endpoint"];
 
-        services.AddOpenTelemetry()
+        var otel = services.AddOpenTelemetry()
             .ConfigureResource(r => r.AddService("VoiceAssistLab"))
-            .WithTracing(tracing => tracing
-                .AddSource(ActivitySourceName)
-                .AddAspNetCoreInstrumentation()
-                .AddHttpClientInstrumentation()
-                .AddOtlpExporter(o => o.Endpoint = new Uri(otlpEndpoint)))
-            .WithMetrics(metrics => metrics
-                .AddMeter(MeterName)
-                .AddAspNetCoreInstrumentation()
-                .AddHttpClientInstrumentation()
-                .AddOtlpExporter(o => o.Endpoint = new Uri(otlpEndpoint)));
+            .WithTracing(tracing =>
+            {
+                tracing
+                    .AddSource(ActivitySourceName)
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation();
+
+                // Only export when an explicit endpoint is configured — avoids
+                // blocking startup when Seq / collector is not running locally.
+                if (!string.IsNullOrEmpty(otlpEndpoint))
+                    tracing.AddOtlpExporter(o =>
+                    {
+                        o.Endpoint = new Uri(otlpEndpoint);
+                        o.TimeoutMilliseconds = 2_000;
+                    });
+            })
+            .WithMetrics(metrics =>
+            {
+                metrics
+                    .AddMeter(MeterName)
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation();
+
+                if (!string.IsNullOrEmpty(otlpEndpoint))
+                    metrics.AddOtlpExporter(o =>
+                    {
+                        o.Endpoint = new Uri(otlpEndpoint);
+                        o.TimeoutMilliseconds = 2_000;
+                    });
+            });
 
         return services;
     }
