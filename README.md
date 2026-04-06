@@ -59,12 +59,14 @@ cp .env.example .env
 docker compose -f docker/docker-compose.yml up -d
 
 # 3. Run the API
-cd src/VoiceAssistLab.Api
-dotnet run
+./run.sh
 
 # 4. Open the frontend
 # Visit http://localhost:5000 in your browser
 ```
+
+> **WSL2 note:** `dotnet run` has a known pipe issue on WSL2 where the app starts but produces no output.
+> Use `./run.sh` instead — it calls `dotnet build` followed by running the compiled DLL directly.
 
 Alternatively, use the Aspire AppHost for a unified experience:
 
@@ -199,6 +201,11 @@ Polly pipelines are registered via `IHttpClientBuilder.AddResilienceHandler` for
 - **Whisper audio format**: expects WAV 16kHz mono 16-bit PCM. The browser's `getUserMedia` produces WebM/Opus. Solution: `AudioWorklet` for real-time PCM conversion in the browser + `WavEncoder` server-side wrapper. Do this first.
 - **Kokoro first-byte latency**: 800ms–1.5s on CPU. Without sentence-boundary splitting, E2E latency exceeded 3s. The sentence-boundary optimization brings it back under target.
 - **AudioWorklet from Blob URL**: registering the worklet inline via `URL.createObjectURL(new Blob([src]))` avoids needing a separate file on the server.
+
+### WSL2 Gotchas
+- **`dotnet run` pipe bug**: on WSL2, `dotnet run` launches the child process but silently drops its stdout/stderr — the app runs but produces no visible output, making it appear frozen. Workaround: `dotnet build` + `dotnet <dll>` directly (see `run.sh`).
+- **OTel OTLP exporter blocks startup**: `AddOtlpExporter` retries connections with a 10s timeout when the collector is unreachable, locking the startup loop. Fix: only register the exporter when `Otel:Endpoint` is explicitly set in config.
+- **Seq container zombies on WSL2**: `docker stop` may fail with "did not receive an exit event". Fix: `docker update --restart=no <name>` then `docker stop`.
 
 ### Phase 3 — Reliability
 - **Rate limiter partition key**: using a session cookie as the partition key is better than IP for users behind NAT. Fall back to IP if cookie is absent.

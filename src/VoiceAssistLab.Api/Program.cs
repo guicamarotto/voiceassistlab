@@ -67,20 +67,28 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(opts => opts.SwaggerEndpoint("/swagger/v1/swagger.json", "VoiceAssist Lab v1"));
 }
 
-// Static frontend files served from /frontend relative to repo root
-var frontendPath = Path.Combine(builder.Environment.ContentRootPath, "..", "..", "frontend");
-if (Directory.Exists(frontendPath))
+// Resolve frontend directory regardless of how the app is launched:
+//   dotnet run  → ContentRoot = src/VoiceAssistLab.Api  → ../../frontend = repo root/frontend
+//   ./run.sh    → AppContext.BaseDirectory = bin/Debug/net8.0/ → ../../../../frontend = repo root/frontend
+var frontendPath = new[]
+{
+    Path.Combine(builder.Environment.ContentRootPath, "..", "..", "frontend"),
+    Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "frontend"),
+    Path.Combine(builder.Environment.ContentRootPath, "frontend"),
+}
+.Select(Path.GetFullPath)
+.FirstOrDefault(Directory.Exists);
+
+if (frontendPath is not null)
 {
     app.UseDefaultFiles(new DefaultFilesOptions
     {
-        FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-            Path.GetFullPath(frontendPath)),
+        FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(frontendPath),
         RequestPath = "",
     });
     app.UseStaticFiles(new StaticFileOptions
     {
-        FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-            Path.GetFullPath(frontendPath)),
+        FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(frontendPath),
         RequestPath = "",
     });
 }
